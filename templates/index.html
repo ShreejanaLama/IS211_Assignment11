@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List App</title>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+
+    <table border="1">
+        <tr>
+            <th>Task</th>
+            <th>Email</th>
+            <th>Priority</th>
+            <th>Action</th>
+        </tr>
+        {% for item in todos %}
+        <tr>
+            <td>{{ item.task }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.priority }}</td>
+            <td>
+                <form action="/delete/{{ loop.index0 }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add New To-Do</h2>
+    <form action="/submit" method="post">
+        Task: <input type="text" name="task" required><br><br>
+        Email: <input type="email" name="email" required><br><br>
+        Priority:
+        <select name="priority">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select><br><br>
+        <input type="submit" value="Add To Do Item">
+    </form>
+
+    <br>
+    <form action="/clear" method="post">
+        <button type="submit">Clear</button>
+    </form>
+
+    <form action="/save" method="post">
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
